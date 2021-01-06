@@ -63,7 +63,30 @@
 
 
         <div>
-            <a class="cta-form contact-now" href="#contact-now">YÊU CẦU THÔNG TIN</a>
+            @if (current_user != null)
+            {
+
+                if (current_user.ObjectId != ViewBag.user.ObjectId)
+                {
+                    <a href="@Url.Action("CreateChatSession","User",new { userIdToChat = ViewBag.user.ObjectId })" class="cta-form contact-now" style="background-color: green;">
+                        <strong>CHAT NGAY !</strong>
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="cta-form contact-now">
+                        <strong>Bạn là người đăng bài biết này !</strong>
+                    </a>
+                }
+
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "User")" class="cta-form contact-now">
+                    <strong>Đăng nhập ngay để Chat !</strong>
+                </a>
+            }
+
         </div>
     </div>
 </div>

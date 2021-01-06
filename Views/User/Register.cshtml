@@ -1,137 +1,142 @@
 ﻿@model WebsiteMVC.ViewModels.RegisterViewModel
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Đăng ký</title>
+    <link href="~/Content/bootstrap/bootstrap-min-4.0.0.css" rel="stylesheet" />
+    <script src="~/Content/js/bootstrap-min-4.0.0.js"></script>
+    <script src="~/Content/js/jquery-3.2.1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+</head>
+<body>
 
 
-<title>Đăng ký</title>
-<link href="~/Content/bootstrap/bootstrap-min-4.0.0.css" rel="stylesheet" />
-<script src="~/Content/js/bootstrap-min-4.0.0.js"></script>
-<script src="~/Content/js/jquery-3.2.1.js"></script>
+    
+    <style>
 
-<!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
-<style>
-
-    .error_reg{
-
-        color:red;
-
-    }
-
-</style>
-<div class="container">
-    <br>  <p class="text-center"><a href="@Url.Action("Index", "House")">Trang chủ</a></p>
-    <hr>
+        .error_reg {
+            color: red;
+        }
+    </style>
+    <div class="container">
+        <br>  <p class="text-center"><a href="@Url.Action("Index", "House")">Trang chủ</a></p>
+        <hr>
 
 
-    <div class="card bg-light">
-        <article class="card-body mx-auto" style="width: 50%;">
-            <h4 class="card-title mt-3 text-center">ĐĂNG KÝ</h4>
-
-            
-            @using (Html.BeginForm("Register", "User", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="width: 50%;">
+                <h4 class="card-title mt-3 text-center">ĐĂNG KÝ</h4>
 
 
-                @Html.ValidationMessageFor(m => m.Fullname, "", new { @class = "error_reg" })
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationMessageFor(m => m.Fullname, "", new { @class = "error_reg" })
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.Fullname, "", new { @placeholder = "Họ và tên", @class = "form-control" })
+
                     </div>
-                    @Html.TextBoxFor(m => m.Fullname, "", new { @placeholder = "Họ và tên", @class = "form-control" })
-
-                </div>
 
 
-                <div>
-                    @if (ViewBag.error != null)
-                    {
-                        <span class="error_reg">@ViewBag.error</span>
-                    }
-                </div>
-
-                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error_reg" })
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    <div>
+                        @if (ViewBag.error != null)
+                        {
+                            <span class="error_reg">@ViewBag.error</span>
+                        }
                     </div>
-                    @Html.TextBoxFor(m => m.Email, "", new { @placeholder = "Email", @class = "form-control" })
+
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error_reg" })
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.Email, "", new { @placeholder = "Email", @class = "form-control" })
 
 
-                </div>
-
-
-
-                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "error_reg" })
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    @Html.TextBoxFor(m => m.Phone, "", new { @placeholder = "Số điện thoại", @class = "form-control" })
 
-                </div>
 
-                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "error_reg" })
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+
+                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "error_reg" })
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.Phone, "", new { @placeholder = "Số điện thoại", @class = "form-control" })
+
                     </div>
-                    @Html.TextBoxFor(m => m.Address, "", new { @placeholder = "Địa chỉ", @class = "form-control" })
 
-                </div>
+                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "error_reg" })
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.Address, "", new { @placeholder = "Địa chỉ", @class = "form-control" })
 
-
-                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error_reg" })
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    @Html.TextBoxFor(m => m.Password, "", new { @placeholder = "Mật khẩu", @type = "password", @class = "form-control" })
-
-                </div>
 
 
-                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error_reg" })
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error_reg" })
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.Password, "", new { @placeholder = "Mật khẩu", @type = "password", @class = "form-control" })
+
                     </div>
-                    @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @placeholder = "Nhập lại mật khẩu", @type = "password", @class = "form-control" })
-
-                </div>
 
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">ĐĂNG KÝ</button>
-                </div> <!-- form-group// -->
-                <p class="text-center">Đã có tài khoản? <a href="/User/Login">Đăng nhập</a> </p>
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error_reg" })
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @placeholder = "Nhập lại mật khẩu", @type = "password", @class = "form-control" })
 
-            }
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">ĐĂNG KÝ</button>
+                    </div> <!-- form-group// -->
+                    <p class="text-center">Đã có tài khoản? <a href="/User/Login">Đăng nhập</a> </p>
+
+                }
 
 
 
 
-        </article>
-    </div> <!-- card.// -->
-</div>
-<!--container end.//
-<br><br>
-<article class="bg-secondary mb-3">
-    <div class="card-body text-center">
-        <h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
-        <p class="h5 text-white">
-            Components and templates  <br> for Ecommerce, marketplace, booking websites
-            and product landing pages
-        </p>   <br>
-        <p>
-            <a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/">
-                Bootstrap-ecommerce.com
-                <i class="fa fa-window-restore "></i>
-            </a>
-        </p>
+            </article>
+        </div> <!-- card.// -->
     </div>
+    <!--container end.//
     <br><br>
-    -->
-</article>
+    <article class="bg-secondary mb-3">
+        <div class="card-body text-center">
+            <h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
+            <p class="h5 text-white">
+                Components and templates  <br> for Ecommerce, marketplace, booking websites
+                and product landing pages
+            </p>   <br>
+            <p>
+                <a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/">
+                    Bootstrap-ecommerce.com
+                    <i class="fa fa-window-restore "></i>
+                </a>
+            </p>
+        </div>
+        <br><br>
+        -->
+    </article>
 
+
+</body>
+</html>
