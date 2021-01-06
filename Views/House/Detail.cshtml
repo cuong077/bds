@@ -40,11 +40,17 @@
             </div>
             <h1>@ViewBag.house.Name</h1>
             <ul class="detailroom">
-                <li title="Phòng ngủ"><span class="font-icon bedroom"></span> @ViewBag.house.Bedroom</li>
-                <li title="Diện tích"><span class="font-icon area"></span> @ViewBag.house.Area m²</li>
+                <li title="Phòng ngủ"><span class="font-icon bedroom"></span>Phòng ngủ : @ViewBag.house.Bedroom</li>
+                <li title="Diện tích"><span class="font-icon area"></span>Diện tích : @ViewBag.house.Area m²</li>
                 <li title="Giá">
-                    <strong>$</strong> @ViewBag.house.Price tr/tháng
+                    <strong>$</strong> @ViewBag.house.Price tr
                 </li>
+                
+
+                
+            </ul>
+            <ul class="detailroom">
+                <li title="Địa chỉ"><span class="font-icon area"></span>Địa chỉ : @ViewBag.house.IDMap</li>
             </ul>
         </header>
 

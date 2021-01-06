@@ -85,7 +85,7 @@
                                 <input type="hidden" name="images[]" value="@ImageHouses[i]" />
                                 <td><img src="@ImageHouses[i]" alt="@ImageHouses[i]" style="max-height: 100px" /></td>
                                 <td>
-                                    <span class="btn btn-warning"><i class=" fa fa-trash-o" k></i> Xóa</span>
+                                    <span class="btn btn-warning btn-delete"><i class=" fa fa-trash-o" k></i> Xóa</span>
                                 </td>
                             </tr>
                         }
@@ -102,8 +102,17 @@
                 </div>
             </div>
         </div>
+
         }
 
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $(".btn-delete").click(function () {
+            $(this).parent("td").parent("tr").remove();
+        });
+    });
+    
 
+</script>

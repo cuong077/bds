@@ -42,8 +42,9 @@
             @if (currentuser != null)
             {
                 <li><a href="#">Xin chào, @currentuser.Fullname</a></li>
-                <li><a href="@Url.Action("Chat","User" )">Trò chuyện</a></li>
-                <li><a href="@Url.Action("Longout","User" )">Đăng xuất</a></li>
+                <li><a href="@Url.Action("Chat", "User" )">Trò chuyện</a></li>
+                <li><a href="@Url.Action("Index", "House", new { area = "AdminCP" } )">Quản lí Nhà Đất</a></li>
+                <li><a href="@Url.Action("Longout", "User" )">Đăng xuất</a></li>
             }
             else
             {
@@ -74,6 +75,7 @@
                         <span style="color:white;">Xin chào, @currentuser.Fullname</span>
                     </li>
                     <li><a class="header1506-link rightmenu-link" href="@Url.Action("Logout", "User")" title="Đăng xuất">Đăng xuất</a></li>
+                    <li><a class="header1506-link rightmenu-link" href="@Url.Action("Index", "House", new { area = "AdminCP" } )" title="Quản lí nhà đất">Quản lí nhà đất</a></li>
                     <li><a class="header1506-link rightmenu-link" href="@Url.Action("Chat", "User")" title="Trò chuyện">Trò chuyện</a></li>
 
                 }
@@ -86,8 +88,6 @@
                 <li>
                     <a class="header1506-link rightmenu-link" href="@Url.Action("Search","House" )">Nhà đất</a>
                 </li>
-                <li><a class="header1506-link rightmenu-link" href="@Url.Action("Index","DuAn")">Dự án</a></li>
-                <li><a class="header1506-link rightmenu-link" href="@Url.Action("GT","House")">Giới thiệu</a></li>
 
 
 
@@ -177,9 +177,7 @@
                             <a href="@Url.Action("Detail","House",new { IDHouse = item.ObjectId })">
                                 <h3 class="heading">@item.Name</h3>
                             </a>
-                            <h4>ABT29545 &#8226; </h4>
-                            <h4><a href=""></a></h4>
-                            <h4><a href=""></a></h4>
+                            <h4>@item.IDMap </h4>
                             <ul>
                                 <li title="Phòng ngủ">
                                     <span class="font-icon bedroom"></span> @item.Bedroom

@@ -1,14 +1,25 @@
 ﻿@model WebsiteMVC.Models.Search
 
+@{ WebsiteMVC.Models.User current_user = Session["user"] as WebsiteMVC.Models.User; }
+
 @using (Html.BeginForm("Search", "House"))
 {
     <div class="header0203 ">
         <nav id="nav-menu" class="header2402-navBar">
             <ul class="menu-header">
                 <li><a href="/">Trang chủ</a></li>
-                
-                <li><a href="@Url.Action("Search","House")">Nhà đất</a></li>
-                <li><a href="@Url.Action("Index","DuAn")">Dự án</a></li>
+
+                @if (current_user == null)
+                {
+                    <li><a href="@Url.Action("Login","User")">Đăng nhập</a></li>
+                    <li><a href="@Url.Action("Register","User")">Đăng ký</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Index","House", new { area = "AdminCP" })">Quản lí nhà đất</a></li>
+                    <li><a href="@Url.Action("Logout","User")">Đăng xuất</a></li>
+                }
+                <li><a href="@Url.Action("Index","House")">Nhà đất</a></li>
             </ul>
             <div id="btn-close-responsive-menu" class="actionIcon"></div>
         </nav>
@@ -30,12 +41,19 @@
             <div class="menuiconblack"></div>
             <div class="right-menu">
                 <ul>
-                    <li>
-                        <a class="header1506-link rightmenu-linkblack"
-                           href="@Url.Action("Search","House")">Tìm kiếm</a>
-                    </li>
-                    <li><a class="header1506-link rightmenu-linkblack" href="@Url.Action("Index","DuAn")">Dự án</a></li>
-                    <li><a class="header1506-link rightmenu-linkblack" href="@Url.Action("GT","House")">Giới thiệu</a></li>
+
+                    @if (current_user == null)
+                    {
+                        <li><a class="header1506-link rightmenu-linkblack" href="@Url.Action("Login","User")">Đăng nhập</a></li>
+                        <li><a class="header1506-link rightmenu-linkblack" href="@Url.Action("Register","User")">Đăng ký</a></li>
+                    }
+                    else
+                    {
+                        <li><a class="header1506-link rightmenu-linkblack" href="@Url.Action("Index","House", new { area = "AdminCP" })">Quản lí nhà đất</a></li>
+                        <li><a class="header1506-link rightmenu-linkblack" href="@Url.Action("Logout","User")">Đăng xuất</a></li>
+                    }
+
+                    <li><a class="header1506-link rightmenu-linkblack" href="@Url.Action("Index","House")">Nhà đất</a></li>
                 </ul>
             </div>
         </div>
