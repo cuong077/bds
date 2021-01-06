@@ -1,0 +1,223 @@
+﻿@model WebsiteMVC.Models.House
+@{
+    ViewBag.Title = ViewBag.house.Name;
+    Layout = "~/Views/Shared/_Layout02.cshtml";
+}
+
+@{ WebsiteMVC.Models.User current_user = Session["user"] as WebsiteMVC.Models.User; }
+
+<style>
+    .btn-hotline-red:hover{
+        text-decoration: none;
+        
+    }
+    .btn-hotline-red {
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+    }
+    
+    .info-sketch {
+        height: auto;
+        min-height: 190px;
+    }
+
+    @@media screen and (max-width: 480px) {
+        .info-sketch {
+            padding-top: 20px;
+        }
+
+        .floorplan-property .content {
+            padding-bottom: 0;
+        }
+    }
+</style>
+<section class="content-detail-house">
+    <div class="width1140">
+        <header class="detail-house">
+            <div class="address">
+                <span></span> &#8226;
+                <h2><a href=""></a></h2>
+            </div>
+            <h1>@ViewBag.house.Name</h1>
+            <ul class="detailroom">
+                <li title="Phòng ngủ"><span class="font-icon bedroom"></span> @ViewBag.house.Bedroom</li>
+                <li title="Diện tích"><span class="font-icon area"></span> @ViewBag.house.Area m²</li>
+                <li title="Giá">
+                    <strong>$</strong> @ViewBag.house.Price tr/tháng
+                </li>
+            </ul>
+        </header>
+
+    </div>
+</section>
+<div class="cta-bottom-wrapper">
+    <div class="cta-bottom-inner">
+
+
+
+
+        <div>
+            <a class="cta-form contact-now" href="#contact-now">YÊU CẦU THÔNG TIN</a>
+        </div>
+    </div>
+</div>
+<section class="bg-white mgb-0">
+    <section class="width1140">
+        <div class="left-content">
+            <div class="heading-02">Hình ảnh</div>
+            <div class="gallery-property collapsed" data-height="900">
+                @foreach (var item in ViewBag.house.Images)
+                {
+                    <div class="cover">
+                        <a href="#" title="">
+                            <img src="@item" alt="@item" title="@item">
+                            <span>@ViewBag.house.Name</span>
+                        </a>
+                    </div>
+                }
+                <div class="last-div"></div>
+            </div>
+
+            <div class="heading-02">Tổng quan</div>
+            <div class="content collapsed pdb-0" data-height="150">
+                <p class="summary">@ViewBag.house.Sumary</p>
+            </div>
+
+            @*
+                @Html.Action("InfoHouse", "House", new { id = Model.IDHouse })
+
+
+                @Html.Action("ImageHouse", "House", new { id = Model.IDHouse })
+            *@
+
+
+
+
+            @*
+                @if (Model.DuAn != null)
+                {
+                    <div class="heading-02">Thông tin dự án</div>
+                    <div class="pdt-15">
+                        <div class="khudancu-left">
+                            <a href="@Url.Action("Detail","DuAn",new { IDDuAn = Model.DuAn.IDDuAn})" title="@Model.DuAn.Name">
+                                <div class="khudancu-img">
+                                    <img class="image-pixelated" src="@(Model.DuAn.ImageDuAns.FirstOrDefault()?.Link)" alt="@Model.DuAn.Name"
+                                         title="@Model.DuAn.Name">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="khudancu-right">
+                            <a href="@Url.Action("Detail","DuAn",new { IDDuAn = Model.DuAn.IDDuAn})" title="@Model.DuAn.Name">
+                                <p class="title">@Model.DuAn.Name</p>
+                            </a>
+                            <p class="summary pdt-0" data-height="150">@Model.DuAn.Sumary</p>
+                            <ul>
+                                <li class="btn-chitiet"><a href="@Url.Action("Detail","DuAn",new { IDDuAn = Model.DuAn.IDDuAn})">Xem chi tiết</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+
+            *@
+        </div>
+
+        <div class="right-content">
+            <div class="agent-detail-house" style="border: 1px solid #ccc !important;">
+                <div class="contact-agency-info">
+                    <div class="avataragency cover">
+                        <img src="https://genslerzudansdentistry.com/wp-content/uploads/2015/11/anonymous-user.png" alt="@ViewBag.user.Fullname" title="@ViewBag.user.Fullname">
+                    </div>
+                    <div class="infoagency">
+                        <h3>@ViewBag.user.Fullname</h3>
+                        <p>Vị trí</p>
+                    </div>
+
+                    <div style="clear:both;"></div>
+
+                    <div class="contact-agency">
+                        <div class="proprety-form-contact" id="contact-now-fixed-form"></div>
+                        <a href="tel:@ViewBag.user.Phone" class="btn-hotline-red">
+                            <strong>Gọi ngay @ViewBag.user.Phone</strong>
+                        </a>
+                    </div>
+
+
+                    <div class="contact-agency">
+                        <div class="proprety-form-contact" id="contact-now-fixed-form"></div>
+                        @if (current_user != null)
+                        {
+
+                            if (current_user.ObjectId != ViewBag.user.ObjectId)
+                            {
+                                <a href="@Url.Action("CreateChatSession","User",new { userIdToChat = ViewBag.user.ObjectId })" class="btn-hotline-red" style="background-color: green;">
+                                    <strong>CHAT NGAY !</strong>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="btn-hotline-red" style="background-color: #6079ad;">
+                                    <strong>Bạn là người đăng bài biết này !</strong>
+                                </a>
+                            }
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "User")" class="btn-hotline-red" style="background-color: #0954f1;">
+                                <strong>Đăng nhập ngay để Chat !</strong>
+                            </a>
+                        }
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</section>
+<div id="contact-now-form" class="mdialog">
+    <div class="body">
+        <div class="form-signup">
+            <div class="title">
+                Liên hệ chuyên viên Rever
+                <a href="#" class="actionIcon close" title="Đóng"></a>
+            </div>
+            <form name="contact-dialog">
+                <div class="box-form proprety-form-contact" id="contact-now-form-body"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="mdialog" id="sell-now-form" style="background: none">
+    <div class="popup-overlay">
+        <div class="title title-res">
+            <span>
+                <a class="back-icon cnb-close" href="javascript:void(0)"></a>
+            </span>
+            <span class="house-type">Bán, cho thuê nhà với Rever</span>
+        </div>
+        <div class="popup-contact">
+            <div class="bg-e1e2e6 header">
+                Bán, cho thuê nhà với Rever
+            </div>
+            <div class="actionIcon cnb-close"></div>
+            <div class="form-contact contact-form">
+                <div class="contact" id="sell-now-form-body"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    @if (Model.IDDuAn.HasValue)
+    {
+        @Html.Action("More", "House", new { IDHouse = Model.IDHouse, IsCungDuAn = true })
+    }
+
+    @Html.Action("More", "House", new { IDHouse = Model.IDHouse, IsCungDuAn = false })
+*@

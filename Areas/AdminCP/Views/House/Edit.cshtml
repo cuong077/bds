@@ -1,0 +1,109 @@
+﻿@model WebsiteMVC.ViewModels.EditHouseView
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-pencil"></i> @ViewBag.Title</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Edit", "House", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ObjectId)
+            @Html.HiddenFor(model => model.CreateBy)
+            @Html.HiddenFor(model => model.isEdit)
+            <h2>Thông tin chính</h2>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, "Tên", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">H</span>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sumary, "Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Sumary, new { rows = 10, cols = 40, @class = "form-control", required = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IDMap, "Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.IDMap, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bedroom, "Số phòng ngủ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Bedroom, new { @class = "form-control", required = "true", type = "number" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Area, "Diện tích", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.Area, new { @class = "form-control", required = "true", type = "number" })
+                        <span class="input-group-addon" id="basic-addon1">m2</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, "Giá bán/cho thuê", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control", required = "true" })
+                </div>
+            </div>
+            <hr />
+            <hr />
+            <hr />
+            <h2>Hình ảnh</h2>
+            <p>Upload ảnh mới: <input type="file" name="Image" value="" multiple /></p>
+            @if (Model.Images != null)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Hình ảnh</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (int i = 0; i < Model.Images.Count; i++)
+                        {
+                            var ImageHouses = Model.Images.ToList();
+
+                            <tr>
+                                <input type="hidden" name="images[]" value="@ImageHouses[i]" />
+                                <td><img src="@ImageHouses[i]" alt="@ImageHouses[i]" style="max-height: 100px" /></td>
+                                <td>
+                                    <span class="btn btn-warning"><i class=" fa fa-trash-o" k></i> Xóa</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            }
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn green" />
+                    <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> QUAY LẠI DANH SÁCH</a>
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>
+
